@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+
 //components
 import GameItem from "../components/GameItem";
+import GameDetailItem from "../components/GameDetailItem";
 
 
 const GameList = styled(motion.section)({
@@ -29,9 +31,9 @@ const Games = styled(motion.div)({
 const Home = () => {
     const {popular, upComing, newGames} = useSelector(state => state);
 
-
     return (
         <GameList>
+            <GameDetailItem/>
             <h2>upcoming games</h2>
             <Games>
                 {

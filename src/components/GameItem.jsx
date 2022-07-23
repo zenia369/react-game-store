@@ -12,7 +12,7 @@ const ItemStyle = styled(motion.div)({
     textAlign: 'center',
     img: {
         width: '100%',
-        height: 300,
+        height: '100%',
         float: 'left',
     },
     h3: {
@@ -29,6 +29,7 @@ const ItemStyle = styled(motion.div)({
 })
 
 const GameItem = (props) => {
+
     return (
         <ItemStyle>
             <h3>{props.name}</h3>
