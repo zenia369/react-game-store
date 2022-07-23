@@ -3,12 +3,12 @@ import axios from 'axios';
 
 import getDate from '../../helpers/getDate';
 
-export const popularFetch = createAsyncThunk(
-    'popular/fetchItmes',
+export const unComingFetch = createAsyncThunk(
+    'unComing/fetchItmes',
     async () => {
         const infoYear = getDate();
 
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}games?key=${process.env.REACT_APP_API_KEY}&dates=${infoYear.last},${infoYear.current}&ordering=-rating&page_size=20`);
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}games?key=${process.env.REACT_APP_API_KEY}&dates=${infoYear.current},${infoYear.next}&ordering=-added&page_size=20`);
 
         return response.data.results
     }
@@ -21,20 +21,20 @@ const initialState = {
     error: null
 }
 
-const popularSlice = createSlice({
-    name: 'popular',
+const unComingSlice = createSlice({
+    name: 'unComing',
     initialState,
     reducers: {},
     extraReducers: {
-        [popularFetch.fulfilled]: (state, actions) => {
+        [unComingFetch.fulfilled]: (state, actions) => {
             state.items = actions.payload;
             state.isLoaded = true;
         },
-        [popularFetch.rejected]: (state, actions) => {
+        [unComingFetch.rejected]: (state, actions) => {
             state.error = actions.payload.message
         }
     },
 });
 
-export const {} = popularSlice.actions
-export default popularSlice.reducer
+export const {} = unComingSlice.actions
+export default unComingSlice.reducer

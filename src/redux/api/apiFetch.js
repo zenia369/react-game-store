@@ -1,17 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const getDate = () => {
-    const date = new Date();
-    const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
-    const year = date.getFullYear();
-    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-
-    return {
-        current: `${year}-${month}-${day}`,
-        last: `${year - 1}-${month}-${day}`,
-        next: `${year + 1}-${month}-${day}`
-    }
-}
+import getDate from '../../helpers/getDate';
 
 const appApi = createApi({
     reducerPath: 'appApi',
