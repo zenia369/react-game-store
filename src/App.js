@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
+import { useRoutes } from "react-router-dom";
+
 import { newGamesFetch } from "./redux/features/newGamesSlice";
 import { popularFetch } from "./redux/features/popularSlice";
 import { unComingFetch } from "./redux/features/unComingSlice";
 
 import Home from "./pages/Home";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -17,11 +18,12 @@ function App() {
     dispatch(newGamesFetch());
   }, [dispatch]);
 
-  return (
-    <div className="App">
-      <Home/>
-    </div>
-  );
+  let element = useRoutes([
+    { path: "/", element: <Home /> },
+    { path: "/game/:id", element: <Home /> },
+  ]);
+
+  return <div className="App">{element}</div>;
 }
 
 export default App;
