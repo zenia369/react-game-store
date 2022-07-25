@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+import getSmallUrl from "../helpers/getSmallUrl";
+
 const ItemStyle = styled(motion.div)({
   minHeight: "30vh",
   boxShadow: "0px 5px 20px rgba(0,0,0,0.15)",
@@ -32,12 +34,14 @@ const ItemStyle = styled(motion.div)({
 });
 
 const GameItem = (props) => {
+  const newImagePath = getSmallUrl(props.background_image, 420);
+
   return (
-    <ItemStyle>
+    <ItemStyle layoutId={`${props.id}`}>
       <Link to={`/game/${props.id}`}>
-        <h3>{props.name}</h3>
+        <motion.h3 layoutId={`title ${props.id}`}>{props.name}</motion.h3>
         <p>{props.released}</p>
-        <img src={props.background_image} alt={props.name} />
+        <motion.img layoutId={`image ${props.id}`} src={newImagePath} alt={props.name} />
       </Link>
     </ItemStyle>
   );

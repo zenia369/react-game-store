@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 //components
 import GameItem from "../components/GameItem";
@@ -29,31 +29,35 @@ const Games = styled(motion.div)({
 
 const Home = () => {
   const location = useLocation();
-  const pathGame = location.pathname.split("/")[2];
+  const pathGameId = location.pathname.split("/")[2];
 
   const { popular, upComing, newGames } = useSelector((state) => state);
 
   return (
     <GameList>
-      {pathGame && <GameDetailItem />}
-      <h2>upcoming games</h2>
-      <Games>
-        {upComing.items.map((el) => {
-          return <GameItem key={el.id} {...el} />;
-        })}
-      </Games>
-      <h2>popular games</h2>
-      <Games>
-        {popular.items.map((el) => {
-          return <GameItem key={el.id} {...el} />;
-        })}
-      </Games>
-      <h2>new games</h2>
-      <Games>
-        {newGames.items.map((el) => {
-          return <GameItem key={el.id} {...el} />;
-        })}
-      </Games>
+      <AnimateSharedLayout type="crossfade">
+        <AnimatePresence>
+          {pathGameId && <GameDetailItem pathGameId={pathGameId} />}
+        </AnimatePresence>
+        <h2>upcoming games</h2>
+        <Games>
+          {upComing.items.map((el) => {
+            return <GameItem key={el.id} {...el} />;
+          })}
+        </Games>
+        <h2>popular games</h2>
+        <Games>
+          {popular.items.map((el) => {
+            return <GameItem key={el.id} {...el} />;
+          })}
+        </Games>
+        <h2>new games</h2>
+        <Games>
+          {newGames.items.map((el) => {
+            return <GameItem key={el.id} {...el} />;
+          })}
+        </Games>
+      </AnimateSharedLayout>
     </GameList>
   );
 };
