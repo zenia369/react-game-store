@@ -4,7 +4,7 @@ It is repo for react-game-store and you can see progress of development for this
 Here we are had link: <https://react-game-store-xi.vercel.app/>
 
 ## Store technology
-In this project I`m use Rawg API for data, RTK & query.
+In this project I`m use Rawg API for data, RTK & query, Framer-motion for animations.
 
 ### Naming api`s
 - get upcoming games
