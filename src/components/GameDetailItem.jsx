@@ -8,6 +8,10 @@ import { useGetGameDetailsQuery, useGetGameScreenShotUrlQuery } from "../redux/a
 import getSmallUrl from "../helpers/getSmallUrl";
 import getPlatfomItems from "../helpers/getPlatfomItems";
 
+//Rating Star
+import starEmpty from "../assets/img/star-empty.png";
+import starFull from "../assets/img/star-full.png";
+
 const CardSahdow = styled(motion.div)({
   width: "100%",
   minHeight: "100vh",
@@ -76,8 +80,15 @@ const Stats = styled.div({
       letterSpacing: "0.05rem",
     },
     p: {
-      textTransform: "lowercase",
       color: "#696969",
+    },
+    "& > div": {
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      img: {
+        width: "20px",
+      },
     },
   },
   "& > div > h3": {
@@ -151,6 +162,19 @@ const GameDetailItem = ({ pathGameId }) => {
     navigate("/");
   };
 
+  const getRatingStars = () => {
+    const rationValue = Math.floor(game.rating);
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (rationValue >= i) {
+        stars.push(<img key={"star full" + i} src={starFull} alt="star full" />);
+      } else {
+        stars.push(<img key={"star empty" + i} src={starEmpty} alt="star empty" />);
+      }
+    }
+    return stars;
+  };
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -170,7 +194,8 @@ const GameDetailItem = ({ pathGameId }) => {
             <Stats>
               <div className="rating">
                 <motion.h3 layoutId={`title ${pathGameId}`}>{game.name}</motion.h3>
-                <p>Rating: {game.rating}</p>
+                <p>Rating</p>
+                <div>{getRatingStars()}</div>
               </div>
               <div className="info">
                 <h3>Platforms</h3>

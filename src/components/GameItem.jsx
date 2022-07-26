@@ -37,7 +37,12 @@ const GameItem = (props) => {
   const newImagePath = getSmallUrl(props.background_image, 420);
 
   return (
-    <ItemStyle layoutId={`${props.id}`}>
+    <ItemStyle
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.1 }}
+      layoutId={`${props.id}`}
+    >
       <Link to={`/game/${props.id}`}>
         <motion.h3 layoutId={`title ${props.id}`}>{props.name}</motion.h3>
         <p>{props.released}</p>

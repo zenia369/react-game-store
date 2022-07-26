@@ -8,6 +8,7 @@ import { popularFetch } from "./redux/features/popularSlice";
 import { unComingFetch } from "./redux/features/unComingSlice";
 
 import Home from "./pages/Home";
+import Nav from "./components/Nav";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,12 @@ function App() {
     { path: "/game/:id", element: <Home /> },
   ]);
 
-  return <div className="App">{element}</div>;
+  return (
+    <div className="App">
+      <Nav />
+      {element}
+    </div>
+  );
 }
 
 export default App;
